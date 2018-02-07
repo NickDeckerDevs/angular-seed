@@ -5,16 +5,14 @@
 		display: block;
 		margin-bottom: 10px;
 	}
-	input {
-		&#resetLocation {
-			display: none;
-		}
-		&#lat,
-		&#long {
-			display: none;
-		}
+	label {
+		display: block;
+		margin: 0 0 10px 10px;
 
 	}
+
+
+
 	// #resetLocation {
 	// 	display: none;
 	// }

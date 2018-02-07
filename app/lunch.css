@@ -30,7 +30,6 @@ body {
   .preferences .location-options {
     display: block;
     margin-bottom: 10px; }
-  .preferences input#resetLocation {
-    display: none; }
-  .preferences input#lat, .preferences input#long {
-    display: none; }
+  .preferences label {
+    display: block;
+    margin: 0 0 10px 10px; }

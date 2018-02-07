@@ -1,8 +1,8 @@
 'use strict';
 
-// Declare app level module which depends on views, and components
 angular.module('lunch', [
   'lunch.controllers',
+  'lunch.directives',
   'lunch.services',
   'lunch.filters'
 ]);

@@ -8,18 +8,22 @@ angular.module('lunch.services', [])
 		}
 
 		var yelpAPI = {};
-		yelpAPI.getVenues = function(options) {
-			var defaults = {
-				location: '33991',
-				sort_by: 'rating',
-				limit: 10
-			}
+		yelpAPI.getVenues = function($scope) {
+			console.log('yelpAPI get venues')
+			console.log($scope)
 			var filters = {
 				term: 'restaurants',
-				location: defaults.location,
-				sort_by: defaults.sort_by,
-				limit: defaults.limit
+				sort_by: $scope.sortFilter,
+				limit: $scope.limitFilter
 			};
+			console.log('lat filter: ' + $scope.latitudeFilter);
+			if($scope.latitudeFilter != '') {
+				filters.latitude = $scope.latitudeFilter;
+				filters.longitude = $scope.longitudeFilter;
+			} else {
+				filters.location = $scope.locationFilter;
+			}
+			console.log(filters);
 			return $http.post('/api/yelp', filters, apiRequest.headers);
 		}
 		return yelpAPI;
