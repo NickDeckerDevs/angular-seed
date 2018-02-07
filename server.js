@@ -68,19 +68,12 @@ app.post('/api/yelp', function(req, res) {
 		token :'ujnuZ58kESbm8uaUE3afRcHAJ4Zpzf9AFKWTu1CE595CBWdwiC1ApJQfWNyHxfSzHpyEJiAFovzE1SXhEIGAJ77NHTNhlujOGTePs-x8cbws8zdUCKO3gu9S_-h5WnYx',
 		endpoint: 'https://api.yelp.com/v3/businesses/search',
 	}
-	var defaults = {
-		location: 'Cape%20Coral,%20FL,%2033991',
-		sort_by: 'rating',
-		limit: 10
-	}
 	var options = {
 		term: 'restaurants',
-		location: req.body.location ? req.body.location : defaults.location,
-		sort_by: req.body.sort_by ? req.body.sort_by : defaults.sort_by,
-		limit: req.body.limit ? req.body.limit : defaults.limit
+		location: req.body.location,
+		sort_by: req.body.sort_by,
+		limit: req.body.limit
 	}
-	console.log('limit: ' + options.limit)
-
 	var requestUrl = apiRequest.endpoint + stringifyParams(options);
 	request.get(requestUrl, {
 		headers: {
