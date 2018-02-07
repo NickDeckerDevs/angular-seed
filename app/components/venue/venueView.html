@@ -1,0 +1,10 @@
+<h2>Today's Options!</h2>
+<div><h3>View:</h3> <span>tiles</span> <span>list</span>
+<ul>
+	<li ng-repeat="venue in dynamicVenueList">
+		<figure>
+			<figcaption>{{ venue.name }} - {{ venue.price }}</figcaption>
+			<img src="{{ venue.image_url}}" class="img-responsive">
+		</figure>
+	</li>
+</ul>

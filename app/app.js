@@ -1,8 +1,10 @@
 'use strict';
 
 angular.module('lunch', [
-  'lunch.controllers',
-  'lunch.directives',
-  'lunch.services',
-  'lunch.filters'
+  'venue.controller',
+  'venue.services',
+  'user.controller',
+  'user.services',
+  'app.filters'
+  // 'app.directives'
 ]);

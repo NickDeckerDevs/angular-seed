@@ -1,5 +1,5 @@
-angular.module('lunch.controllers', []).
-controller('lunchController', function($scope, yelpAPIservice, geolocationservice) {
+angular.module('user.controller', [])
+.controller('preferencesController', function($scope, geolocationservice) {
 	$scope.locationFilter = 'Ft. Myers, FL';
 	$scope.latitudeFilter = '';
 	$scope.longitudeFilter = '';
@@ -30,9 +30,5 @@ controller('lunchController', function($scope, yelpAPIservice, geolocationservic
 			$scope.locationType = 'Current Location';
 		});
 	}
-	$scope.getMyVenues = function() {
-		yelpAPIservice.getVenues($scope).success(function(response) {
-			$scope.dynamicVenueList = response.businesses;
-		});
-	}
+
 });

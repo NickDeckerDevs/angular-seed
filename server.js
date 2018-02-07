@@ -2,25 +2,13 @@
 
 // modules =================================================
 var express        = require('express');
+var path           = require('path')
 var app            = express();
 var bodyParser     = require('body-parser');
 var request        = require('request');
 var methodOverride = require('method-override');
+var yelpApi        = require('./assets/js/yelp');
 
-// helper functions ========================================
-
-function consoleObject(jsobj) {
-	var json = JSON.stringify(jsobj, null, 4);
-	console.log(json);
-}
-
-function stringifyParams(params) {
-	var urlParams = '?';
-	Object.keys(params).forEach(function(key) {
-		urlParams += '&' + key + '=' + params[key];
-	});
-	return urlParams;
-}
 
 // configuration ===========================================
 
@@ -48,7 +36,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // app.use(methodOverride('X-HTTP-Method-Override'));
 
 // set the static files location /public/img will be /img for users
-app.use(express.static(__dirname + '/app'));
+app.use(express.static(path.join(__dirname, 'app')));
+app.use(express.static(path.join(__dirname, 'assets')));
 
 // routes ==================================================
 // require('./app/routes')(app); // configure our routes
@@ -64,30 +53,7 @@ router.use(function(req, res, next) {
 
 // backend route to assist app with getting data from yelp
 app.post('/api/yelp', function(req, res) {
-	var apiRequest = {
-		token :'ujnuZ58kESbm8uaUE3afRcHAJ4Zpzf9AFKWTu1CE595CBWdwiC1ApJQfWNyHxfSzHpyEJiAFovzE1SXhEIGAJ77NHTNhlujOGTePs-x8cbws8zdUCKO3gu9S_-h5WnYx',
-		endpoint: 'https://api.yelp.com/v3/businesses/search',
-	}
-	var options = {
-		term: 'restaurants',
-		location: req.body.location,
-		sort_by: req.body.sort_by,
-		limit: req.body.limit
-	}
-	var requestUrl = apiRequest.endpoint + stringifyParams(options);
-	request.get(requestUrl, {
-		headers: {
-			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + apiRequest.token
-		}
-
-	}, function optionalCallBack(error, response, body) {
-		if(error) {
-			console.log(error)
-			res.send(error);
-		}
-		res.send(body);
-	});
+	return yelpApi.getYelpData(req, res);
 });
 
 // start app ===============================================

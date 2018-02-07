@@ -1,4 +1,4 @@
-angular.module('lunch.filters', [])
+angular.module('app.filters', [])
 .filter('replace', function () {
 	return function(input, from, to) {
 	    input = input || '';

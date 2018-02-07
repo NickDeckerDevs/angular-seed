@@ -23,15 +23,15 @@ var uglify = require('gulp-uglify');
 
 var scripts = {
 	js: [
-		'node_modules/yelp-api/yelp-api.js'
+		'assets/js/scripts.js'
 	]
 }
 
 gulp.task('build-scripts', function() {
 	return gulp.src(scripts.js)
-        .pipe(concat('combined.js'))
+        .pipe(concat('lunch.js'))
         // .pipe(uglify())
-        .pipe(gulp.dest('app'))
+        .pipe(gulp.dest('assets/js/min'))
 		.pipe(notify({ message: 'scripts built' }));
 });
 
@@ -50,12 +50,12 @@ gulp.task('build-production', function() {
     }
     return gulp.src(local+'/sass/main.scss')
         .pipe(plumber({errorHandler: onError}))
-        .pipe(rename('/-production.scss'))
+        .pipe(rename('/lunch.scss'))
         .pipe(sass({
             includePaths: scssIncludePaths
         }))
         .pipe(rename('/lunch.css'))
-        .pipe(gulp.dest(local+'/app'));
+        .pipe(gulp.dest(local+'/assets/css'));
 });
 
 

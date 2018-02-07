@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="lunch" ng-controller="lunchController" class="no-js">
+<html lang="en" ng-app="lunch" class="no-js">
 <!--<![endif]-->
 
 <head>
@@ -10,8 +10,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
 	<link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-	<link rel="stylesheet" href="app.css">
-    <link rel="stylesheet" href="lunch.css">
+	<link href="https://fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+	<link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/lunch.css">
+
 	<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
 
@@ -27,57 +29,13 @@
 		<li><a href="#review">Review Where I Ate</a></li>
         <li><a href="#preferences">Change Preferences</a></li>
 	</ul>
-    <div class="preferences">
-        <h2>Options</h2>
-        <label for="location">
-            <span class="location-options">Location Options: <span id="location-type">{{ locationType }}</span></span>
-            <input id="address" ng-show="!usingLocation" name="address" type="text" ng-model="locationFilter" placeholder="Enter City, State and/or Zip">
-			<!--- reset location -->
-			<input id="reset-location" ng-show="usingLocation" name="reset-location" type="button" value="Reset Location Options" ng-click="resetLocation()">
-            <!--- get location -->
-            <input id="get-my-location-button" ng-show="!usingLocation" name="get-my-location-button" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
-        </label>
-        <label for "geo" ng-hide="true">
-            Latitude:
-            <input id="lat" ng-show="usingLocation" name="lat" type="text" ng-model="latitudeFilter" disabled>
-            <br>
-            Longitude:
-            <input id="long" ng-show="usingLocation" name="long" type="text" ng-model="longitudeFilter" disabled>
-        </label>
-        <label for="using-location" ng-hide="true">
-            Using Location:
-            <input type="text" ng-model="usingLocation">
-        </label>
-        <label for="sort_by">
-            Sort Preference:
-            <select id="sort_by" name="sort_by" ng-model="sortFilter">
-                 <option ng-repeat="option in sortOptions" value="{{ option }}">{{ option | prettyText }}</option>
-             </select>
-        </label>
-        <label for="distance">
-            Mile Radius:
-            <select id="distance" name="distance" ng-model="distanceFilter">
-                 <option ng-repeat="distance in distanceOptions" value="{{ distance }}">{{ distance }}</option>
-             </select>
-        </label>
-        <label for="get-lunch">
-            <input id="get-lunch" name="get-lunch" type="button" value="Find a Place to Eat" ng-click="getMyVenues()">
-        </label>
-    </div>
-    <div class="find">
-        <h2>header</h2>
-        <ul>
-            <li ng-repeat="venue in dynamicVenueList">
-                <figure>
-                    <figcaption>{{ venue.name }} - {{ venue.price }}</figcaption>
-                    <img src="{{ venue.image_url}}" class="img-responsive">
 
-                </figure>
-            </li>
-        </ul>
-    </div>
-	<div ng-view></div>
+    <div class="preferences" ng-controller="preferencesController" ng-include="'components/user/userPreferencesView.html'">
 
+    </div>
+    <div class="find" ng-controller="venueController" ng-include="'components/venue/venueView.html'">
+
+    </div>
 
 
 	<!-- In production use:
@@ -88,11 +46,14 @@
 	<script src="bower_components/angular-route/angular-route.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     <script src="app.js"></script>
-    <script src="controllers.js"></script>
-	<script src="directives.js"></script>
-	<script src="services.js"></script>
-    <script src="filters.js"></script>
-    <script src="scripts.js"></script>
+    <script src="components/user/userController.js"></script>
+	<script src="components/user/userServices.js"></script>
+	<script src="components/venue/venueController.js"></script>
+	<script src="components/venue/yelpApiService.js"></script>
+	<script src="shared/directives.js"></script>
+	<script src="shared/filters.js"></script>
+
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>
