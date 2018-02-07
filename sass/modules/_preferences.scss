@@ -1,5 +1,21 @@
 .preferences {
 	background: $grey;
 	padding: 40px 0;
-	
+	.location-options {
+		display: block;
+		margin-bottom: 10px;
+	}
+	input {
+		&#resetLocation {
+			display: none;
+		}
+		&#lat,
+		&#long {
+			display: none;
+		}
+
+	}
+	// #resetLocation {
+	// 	display: none;
+	// }
 }

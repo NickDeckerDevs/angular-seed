@@ -27,3 +27,10 @@ body {
 .preferences {
   background: #efefef;
   padding: 40px 0; }
+  .preferences .location-options {
+    display: block;
+    margin-bottom: 10px; }
+  .preferences input#resetLocation {
+    display: none; }
+  .preferences input#lat, .preferences input#long {
+    display: none; }

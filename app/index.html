@@ -29,16 +29,22 @@
     <div class="preferences">
         <h2>Options</h2>
         <label for="location">
-            <input id="address" type="text" ng-model="locationFilter" placeholder="Enter City, State and/or Zip"> <input id="getMyLocationButton" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
-			<input type="text" ng-model="latitudeFilter">
-			<input type="text" ng-model="longitudeFilter">
+            <span class="location-options">Location Options: <span id="location-type">{{ locationType }}</span></span>
+            <input id="address" type="text" ng-model="locationFilter" placeholder="Enter City, State and/or Zip"> <input id="get-my-location-button" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
+			<input id="lat" type="text" ng-model="latitudeFilter">
+			<input id="long" type="text" ng-model="longitudeFilter">
+            <input id="reset-location" type="button" value="Reset Location Options">
         </label>
-		<preferences-directive></preferences-directive>
+        <label for="sort_by">
+            Sort Preference:
+            <select ng-model="sortFilter">
+                 <option ng-repeat="option in sortOptions" value="{{ option }}">{{ option | prettyText }}</option>
+             </select>
+        </label>
     </div>
     <div class="find">
         <h2>header</h2>
         <ul>
-            <!-- <li ng-repeat="venue in dynamicVenueList"> -->
             <li ng-repeat="venue in dynamicVenueList">
                 <figure>
                     <figcaption>{{ venue.name }} - {{ venue.price }}</figcaption>
@@ -61,6 +67,8 @@
     <script src="app.js"></script>
     <script src="controllers.js"></script>
     <script src="services.js"></script>
+    <script src="filters.js"></script>
+    <script src="scripts.js"></script>
 </body>
 
 </html>

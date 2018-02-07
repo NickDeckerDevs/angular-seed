@@ -3,5 +3,6 @@
 // Declare app level module which depends on views, and components
 angular.module('lunch', [
   'lunch.controllers',
-  'lunch.services'
+  'lunch.services',
+  'lunch.filters'
 ]);

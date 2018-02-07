@@ -26,8 +26,6 @@ angular.module('lunch.services', [])
 	})
 	.factory('geolocationservice', ['$q', '$window', function($q, $window) {
 		'use strict';
-		document.getElementById('getMyLocationButton').disabled = true;
-		document.getElementById('address').disabled = true;
 		var userLocation = {};
 		userLocation.loading = 'Getting Location';
 		var defer = $q.defer();
