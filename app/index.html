@@ -26,10 +26,20 @@
 		<li><a href="#lunch">Find a Place for Lunch</a></li>
 		<li><a href="#review">Review Where I Ate</a></li>
 	</ul>
+    <div class="preferences">
+        <h2>Options</h2>
+        <label for="location">
+            <input id="address" type="text" ng-model="locationFilter" placeholder="Enter City, State and/or Zip"> <input id="getMyLocationButton" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
+			<input type="text" ng-model="latitudeFilter">
+			<input type="text" ng-model="longitudeFilter">
+        </label>
+		<preferences-directive></preferences-directive>
+    </div>
     <div class="find">
-
+        <h2>header</h2>
         <ul>
-            <li ng-repeat="venue in venueList">
+            <!-- <li ng-repeat="venue in dynamicVenueList"> -->
+            <li ng-repeat="venue in dynamicVenueList">
                 <figure>
                     <figcaption>{{ venue.name }} - {{ venue.price }}</figcaption>
                     <img src="{{ venue.image_url}}" class="img-responsive">
@@ -45,10 +55,12 @@
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
   -->
+
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
-	<script src="app.js"></script>
+    <script src="app.js"></script>
     <script src="controllers.js"></script>
+    <script src="services.js"></script>
 </body>
 
 </html>

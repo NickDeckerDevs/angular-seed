@@ -1,23 +1,49 @@
-angular.module('lunch.services' [])
+angular.module('lunch.services', [])
 	.factory('yelpAPIservice', function($http) { //options to be brought in or some how override default
-		var auth = 'Bearer ujnuZ58kESbm8uaUE3afRcHAJ4Zpzf9AFKWTu1CE595CBWdwiC1ApJQfWNyHxfSzHpyEJiAFovzE1SXhEIGAJ77NHTNhlujOGTePs-x8cbws8zdUCKO3gu9S_-h5WnYx';
-		var defaults = {
-			endpoint: 'https://api.yelp.com/v3/businesses/search',
-			location: 'Bonita%20Springs,%20FL',
-			sort_by: 'rating',
-			limit: 10
-		}
-		var apiUrl = endpoint + '?term=restaurants&location=' + defaults.location + '&sorty_by=' + defaults.sort_by + '&open_now=true&limit=' + defaults.limit;
+		'use strict';
 		var apiRequest = {
-			method: 'GET',
-			url: apiUrl,
 			headers: {
-				'Authorization:': auth
+				'Content-Type': 'application/x-www-form-urlencoded'
 			}
 		}
+
 		var yelpAPI = {};
-		yelpAPI.getVenues = function() {
-			return $http(apiRequest);
+		yelpAPI.getVenues = function(options) {
+			var defaults = {
+				location: '33991',
+				sort_by: 'rating',
+				limit: 10
+			}
+			var filters = {
+				term: 'restaurants',
+				location: defaults.location,
+				sort_by: defaults.sort_by,
+				limit: defaults.limit
+			};
+			return $http.post('/api/yelp', filters, apiRequest.headers);
 		}
 		return yelpAPI;
-	});
+	})
+	.factory('geolocationservice', ['$q', '$window', function($q, $window) {
+		'use strict';
+		document.getElementById('getMyLocationButton').disabled = true;
+		document.getElementById('address').disabled = true;
+		var userLocation = {};
+		userLocation.loading = 'Getting Location';
+		var defer = $q.defer();
+		userLocation.getCurrentPosition = function() {
+			if(!$window.navigator.geolocation) {
+				defer.reject('Geolocation not supported');
+			} else {
+				$window.navigator.geolocation.getCurrentPosition(
+					function(position) {
+						defer.resolve(position.coords);
+					},
+					function(err) {
+						defer.reject(err);
+					});
+			}
+			return defer.promise;
+		}
+		return userLocation;
+	}]);

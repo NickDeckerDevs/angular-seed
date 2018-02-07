@@ -1,0 +1,11 @@
+{
+  "/yelpAPI": {
+    "target": "https://api.yelp.com/v3/businesses/search",
+    "secure": false,
+    "pathRewrite": {
+    "^/": ""
+  },
+    "changeOrigin": true
+  },
+	"logLevel": "debug"
+}
