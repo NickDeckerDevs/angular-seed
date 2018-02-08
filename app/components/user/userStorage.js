@@ -31,16 +31,16 @@ angular.module('user.storage', [])
 		return apiObject;
 	}
 	function getStoredObject() {
-		console.log('getting stored object')
+		// console.log('getting stored object')
 		var storage = $window.localStorage && $window.localStorage.getItem('whatsForlunch');
 		if(storage) {
-			console.log('storage existed, getting it')
+			// console.log('storage existed, getting it')
 			var storageObject = JSON.parse(storage);
 		} else {
-			console.log('creating the storage object')
+			// console.log('creating the storage object')
 			var storageObject = createNewDefaultObject();
 		}
-		console.log(storageObject)
+		// console.log(storageObject)
 		return storageObject;
 	}
 	function createNewDefaultObject() {
@@ -60,7 +60,7 @@ angular.module('user.storage', [])
 			longitudeFilter: longitude
 		};
 		console.log('get rid of this mess above ');
-		console.log(defaultObject)
+		// console.log(defaultObject)
 		$window.localStorage && $window.localStorage.setItem('whatsForlunch', JSON.stringify(defaultObject));
 		return defaultObject;
 
@@ -82,14 +82,14 @@ angular.module('user.storage', [])
 			} else {
 				// console.log('item was not saved because it was the same');
 			}
-			// console.log('setting data: key: ' + key + '  val: ' + val)
+			console.log('setting data: key: ' + key + '  val: ' + val)
 			// console.log($window.localStorage.getItem('whatsForlunch'))
 		},
 		getData: function(key) {
-			// console.log('getting from key: ' + key)
+			console.log('getting from key: ' + key)
 			var storageObject = getStoredObject();
 			// console.log(storageObject)
-			// console.log('and the key is: ' + storageObject[key])
+			console.log('and the key is: ' + storageObject[key])
 			if(!storageObject[key]) return '';
 			return storageObject[key];
 		},
