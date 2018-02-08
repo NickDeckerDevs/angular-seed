@@ -1,5 +1,6 @@
 angular.module('user.storage', [])
-.factory('storageService', function($window, $rootScope) {
+.factory('storageService', function($window, $rootScope, $filter) {
+	var distanceAngularFilter = $filter('toMeters');
 	var defaultLocations = [
 		'Albuquerque, NM',
 		'Tucson, AZ',
@@ -33,31 +34,44 @@ angular.module('user.storage', [])
 		console.log('getting stored object')
 		var storage = $window.localStorage && $window.localStorage.getItem('whatsForlunch');
 		if(storage) {
+			console.log('storage existed, getting it')
 			var storageObject = JSON.parse(storage);
 		} else {
+			console.log('creating the storage object')
 			var storageObject = createNewDefaultObject();
 		}
+		console.log(storageObject)
 		return storageObject;
 	}
 	function createNewDefaultObject() {
 		var randomNumber = Math.floor(Math.random() * defaultLocations.length);
+		var location = defaultLocations[randomNumber] ;
+		var sort = 'rating';
+		var distance = distanceAngularFilter(5);
+		var using = false;
+		var latitude = false;
+		var longitude = false;
 		var defaultObject = {
-			locationFilter: defaultLocations[randomNumber],
-			sortFilter: 'rating',
-			distanceFilter: '5',
-			usingLocation: false,
-			latitudeFilter: '',
-			longitudeFilter: ''
+			locationFilter: location,
+			sortFilter: sort,
+			distanceFilter: distance,
+			usingLocation: using,
+			latitudeFilter: latitude,
+			longitudeFilter: longitude
 		};
-		console.log('creating default');
+		console.log('get rid of this mess above ');
 		console.log(defaultObject)
-
 		$window.localStorage && $window.localStorage.setItem('whatsForlunch', JSON.stringify(defaultObject));
 		return defaultObject;
 
 	}
 	return {
+		clearData: function() {
+			$window.localStorage && $window.localStorage.setItem('whatsForlunch', '');
+		},
 		setData: function(key, val) {
+			// something weird with usingLocation causing something. may not need to have this but w/e
+			val = key == 'usingLocation' && val == '' ? false: val;
 			// just in case we have a little fallback
 			if(val === null) return;
 			var storage = $window.localStorage && $window.localStorage.getItem('whatsForlunch');
@@ -66,17 +80,18 @@ angular.module('user.storage', [])
 				storageObject[key] = val;
 				$window.localStorage && $window.localStorage.setItem('whatsForlunch', JSON.stringify(storageObject));
 			} else {
-				console.log('item was not saved because it was the same');
+				// console.log('item was not saved because it was the same');
 			}
-			console.log('setting data: key: ' + key + '  val: ' + val)
-			console.log($window.localStorage.getItem('whatsForlunch'))
-			// console.log('set');
-			// console.log($window.localStorage && $window.localStorage.getItem('whatsForlunch'));
+			// console.log('setting data: key: ' + key + '  val: ' + val)
+			// console.log($window.localStorage.getItem('whatsForlunch'))
 		},
 		getData: function(key) {
-			console.log('getting from key: ' + key)
+			// console.log('getting from key: ' + key)
 			var storageObject = getStoredObject();
-			return storageObject.key;
+			// console.log(storageObject)
+			// console.log('and the key is: ' + storageObject[key])
+			if(!storageObject[key]) return '';
+			return storageObject[key];
 		},
 		getAllData: function() {
 			return getStoredObject();
