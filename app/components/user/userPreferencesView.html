@@ -28,7 +28,7 @@
 	<label for="distance">
 		Mile Radius:
 		<select id="distance" name="distance" ng-model="distanceFilter" ng-change="updateDistanceFilter(distanceFilter)">
-			 <option ng-repeat="distance in distanceOptions" value="{{ distance | toMeters }}">{{ distance }}</option>
+			 <option ng-repeat="miles in distanceOptions" value="{{ miles }}">{{ miles }}</option>
 		 </select>
 	</label>
 	<span ng-class="link" ng-click="showAdvancedToggle()">Show Advanced Settings</span>

@@ -12,7 +12,6 @@ module.exports = {
 			}
 		}, function optionalCallBack(error, response, body) {
 			if(error) {
-				console.log(error)
 				res.send(error);
 			}
 			res.send(body);
@@ -21,11 +20,12 @@ module.exports = {
 	getYelpOptions: function(req) {
 		var options = {
 			term: 'restaurants',
-			radius: req.body.distanceFilter,
+			radius: parseInt(1609.34 * parseInt(req.body.distanceFilter)),
 			sort_by: req.body.sortFilter,
 			limit: 40,
 			open_now: true
 		};
+		this.consoleObject(options);
 		if(req.body.usingLocation) {
 			options.latitude = req.body.latitudeFilter;
 			options.longitude = req.body.longitudeFilter;
