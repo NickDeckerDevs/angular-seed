@@ -16,6 +16,12 @@ angular.module('app.filters', [])
 		return text.join(' ');
   	};
 })
+.filter('toMeters', function() {
+	return function(input) {
+		var meters = 1609.34 * parseInt(input);
+    	return parseInt(meters);
+  	};
+})
 // .filter('orDefault', function() {
 // 	return function(input, default) {
 // 		var text = input.length > 0 ? input : default;
