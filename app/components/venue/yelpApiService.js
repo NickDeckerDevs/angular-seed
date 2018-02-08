@@ -9,20 +9,8 @@ angular.module('venue.services', [])
 
 	var yelpAPI = {};
 	yelpAPI.getVenues = function($scope) {
-		console.log('yelpAPI get venues')
-		console.log($scope)
-		var filters = {
-			term: 'restaurants',
-			sort_by: $scope.sortFilter,
-			limit: $scope.limitFilter
-		};
-		console.log('lat filter: ' + $scope.latitudeFilter);
-		if($scope.latitudeFilter != '') {
-			filters.latitude = $scope.latitudeFilter;
-			filters.longitude = $scope.longitudeFilter;
-		} else {
-			filters.location = $scope.locationFilter;
-		}
+		console.log('sending to yelp api frontend')
+		var filters = $scope.filters;
 		console.log(filters);
 		return $http.post('/api/yelp', filters, apiRequest.headers);
 	}
