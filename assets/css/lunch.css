@@ -16,13 +16,51 @@ body {
   .find ul li {
     margin: 10px auto 45px;
     display: inline-block; }
+    .find ul li.list {
+      display: block;
+      background: #efefef;
+      padding: 10px 0; }
     .find ul li figure {
       max-width: 300px;
       max-height: 300px;
       overflow: hidden; }
+      .find ul li figure.list {
+        max-width: 100%;
+        max-height: 100%;
+        height: 100%; }
       .find ul li figure figcaption {
         font-size: 1.5em;
         color: #5818b5; }
+        .find ul li figure figcaption h3 {
+          display: inline-block; }
+          .find ul li figure figcaption h3 svg,
+          .find ul li figure figcaption h3 .fa {
+            font-size: 1.2em; }
+          .find ul li figure figcaption h3 .stars svg,
+          .find ul li figure figcaption h3 .stars .fa {
+            color: #ffd700; }
+          .find ul li figure figcaption h3 .cost svg,
+          .find ul li figure figcaption h3 .cost .fa {
+            color: #00ff00; }
+          .find ul li figure figcaption h3.list .stars svg,
+          .find ul li figure figcaption h3.list .stars .fa,
+          .find ul li figure figcaption h3.list .cost svg,
+          .find ul li figure figcaption h3.list .cost .fa {
+            font-size: 1.05em; }
+      .find ul li figure > ul {
+        margin-left: 10px; }
+        .find ul li figure > ul.details.list li {
+          display: inline-block; }
+        .find ul li figure > ul > li {
+          display: block;
+          margin: 10px auto; }
+          .find ul li figure > ul > li.category {
+            display: inline-block;
+            padding-right: 15px; }
+      .find ul li figure p.address {
+        margin: 5px auto; }
+        .find ul li figure p.address.list {
+          display: inline-block; }
 
 .preferences {
   background: #efefef;
