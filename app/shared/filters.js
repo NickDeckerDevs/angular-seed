@@ -22,3 +22,82 @@ angular.module('app.filters', [])
     	return parseInt(meters);
   	};
 })
+.filter('toString', function() {
+	return function(input) {
+		return input.toString();
+  	};
+})
+.filter('phoneNumber', function() {
+	// see s/o accepted answer:  https://stackoverflow.com/questions/12700145/format-telephone-and-credit-card-numbers-in-angularjs
+	return function (tel) {
+        if (!tel) { return ''; }
+
+        var value = tel.toString().trim().replace(/^\+/, '');
+
+        if (value.match(/[^0-9]/)) {
+            return tel;
+        }
+
+        var country, city, number;
+
+        switch (value.length) {
+            case 10: // +1PPP####### -> C (PPP) ###-####
+                country = 1;
+                city = value.slice(0, 3);
+                number = value.slice(3);
+                break;
+
+            case 11: // +CPPP####### -> CCC (PP) ###-####
+                country = value[0];
+                city = value.slice(1, 4);
+                number = value.slice(4);
+                break;
+
+            case 12: // +CCCPP####### -> CCC (PP) ###-####
+                country = value.slice(0, 3);
+                city = value.slice(3, 5);
+                number = value.slice(5);
+                break;
+
+            default:
+                return tel;
+        }
+
+        if (country == 1) {
+            country = "";
+        }
+
+        number = number.slice(0, 3) + '-' + number.slice(3);
+
+        return (country + " (" + city + ") " + number).trim();
+    };
+})
+.filter('toIcons', ['$sce', function($sce) {
+	return function(total, option) {
+		if(!total) return '<span class="no-data">No Data</span>';
+		var max = option == 'stars' ? 5 : 4;
+		var total = option == 'stars' ? total : total.toString().length;
+		var html = '';
+		switch(option) {
+			case 'stars':
+				var full = '<i class="fas fa-star"></i>';
+				var half = '<i class="fas fa-star-half"></i>';
+				var empty = '<i class="far fa-star"></i>';
+				break;
+			case 'dollars':
+				var full = '<i class="fas fa-dollar-sign"></i>';
+				var empty = '';
+				break;
+		}
+		for(var i = 1; i <= max; i++) {
+			if(i <= total) {
+				html += full;
+			} else if((i - .5) == total) {
+				html += half;
+			} else {
+				html += empty;
+			}
+		}
+		return $sce.trustAsHtml(html);
+	}
+}])
