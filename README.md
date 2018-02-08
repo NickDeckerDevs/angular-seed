@@ -1,3 +1,22 @@
+
+I left all the seed stuff below for reference. I have cut out most of this stuff. It was nice to get a base setup.
+
+What we have here is a simple angularjs app. It reaches out to the yelp api and helps you figure out what to eat for lunch. You can use this whenever because it searches "open now"
+
+There are a few minor preferences we start off with.
+
+We are storing local storage because this is mvp and also, just use it on your phone every time. You don't clear anything on there anyways. Get a new phone? UGH!
+
+todo:
+load ng model data from local storage if it exists on init
+add "review" option that allows you to note which ones you'd like to go back to.
+after x days the recomendation engine will bring those ones you liked back into the mix along with new ones.
+style the shit out of it.
+
+
+
+
+
 # `angular-seed` — the seed for AngularJS apps
 
 This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
