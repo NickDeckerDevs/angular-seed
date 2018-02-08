@@ -1,13 +1,14 @@
 angular.module('user.controller', [])
-.controller('preferencesController', function($scope, geolocationservice, storageService, $window) {
-	console.log(storageService.getAllData())
+.controller('preferencesController', function($scope, geolocationservice, storageService, $window, $filter) {
+	var distanceAngularFilter = $filter('toMeters');
+
 	$scope.locationFilter = storageService.getData('locationFilter');
 	$scope.latitudeFilter = storageService.getData('latitudeFilter');
 	$scope.longitudeFilter = storageService.getData('longitudeFilter');
 	$scope.sortOptions = ['rating', 'best_match', 'review_count'];
 	$scope.sortFilter = storageService.getData('sortFilter');
 	$scope.dynamicVenueList = [];
-	$scope.distanceFilter = parseInt(1609.34 * 5).toString();
+	$scope.distanceFilter = storageService.getData('distanceFilter');
 	$scope.distanceOptions = ['5', '7', '10', '12', '15'];
 	$scope.usingLocation = storageService.getData('usingLocation');
 	$scope.locationType = $scope.usingLocation == false ? 'Address' : 'Carrier Pigeons & Tesla Cars in Space';
@@ -51,8 +52,7 @@ angular.module('user.controller', [])
 		storageService.setData('sortFilter', val);
 	}
 	$scope.updateDistanceFilter = function(val) {
-		var meters = 1609.34 * parseInt(val);
-		storageService.setData('distanceFilter', parseInt(meters));
+		storageService.setData('distanceFilter', parseInt(val).toString());
 	}
 	// this is switched via code so we have to watch
 	$scope.$watch('usingLocation', function(val) {
