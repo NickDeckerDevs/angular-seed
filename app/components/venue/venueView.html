@@ -3,12 +3,31 @@
 </label>
 
 <h2>Today's Options!</h2>
-<div><h3>View:</h3> <span>tiles</span> <span>list</span>
+<div><h3>View:</h3> <span ng-click="changeView('tile')">tiles</span> <span ng-click="changeView('list')">list</span>
 <ul>
-	<li ng-repeat="venue in dynamicVenueList">
-		<figure>
-			<figcaption>{{ venue.name }} - {{ venue.price }}</figcaption>
+	<li ng-class="toggleView" ng-repeat="venue in dynamicVenueList">
+		<figure ng-class="toggleView">
+			<figcaption ng-class="toggleView"><h3>{{ venue.name }}</h3>
+				<span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span>
+				<span class="cost" ng-bind-html="venue.price | toIcons:'dollars'"></span>
+			</figcaption>
 			<img src="{{ venue.image_url}}" class="img-responsive">
+			<ul ng-class="toggleView" class="details">
+				<!-- <li>id: <p>{{ venue.id }}</p></li> -->
+				<li><span>Phone: </span> <a href="tel: {{ venue.phone | phoneNumber }}">{{ venue.phone | phoneNumber }}</a></li>
+				<!-- <li>Your Rating: <span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span></li> -->
+				<li>Yelp Rating: </li>
+				<li>
+				<li>Categories:
+					<ul>
+						<li class="category" ng-repeat="category in venue.categories">{{ category.title }}</li>
+					</ul>
+				</li>
+				<li>Address: <div ng-bind-html="venue.location.display_address | yelpAddress"></div></li>
+				<li>Distance: {{ venue.distance | toMiles }} miles</li>
+
+			</ul>
 		</figure>
+
 	</li>
 </ul>
