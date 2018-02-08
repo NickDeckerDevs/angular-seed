@@ -1,7 +1,6 @@
 
 module.exports = {
 	getYelpData: function(req, res) {
-		console.log('backend work time')
 		var request = require('request');
 		var apiRequest = this.getApiDetails();
 		var options = this.getYelpOptions(req);
@@ -16,7 +15,6 @@ module.exports = {
 				console.log(error)
 				res.send(error);
 			}
-			console.log('success maybe')
 			res.send(body);
 		});
 	},
@@ -34,9 +32,8 @@ module.exports = {
 		} else {
 			options.location = req.body.locationFilter;
 		}
-
-		console.log('options in backend api call')
-		console.log(options)
+		// console.log('options in backend api call')
+		// console.log(options)
 		return options;
 	},
 	getApiDetails: function() {

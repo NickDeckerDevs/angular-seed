@@ -46,10 +46,13 @@ angular.module('user.controller', [])
 		storageService.setData('usingLocation', val);
 	});
 	$scope.$watch('latitudeFilter', function(val) {
-		storageService.setData('latitudeFilter', parseFloat(val));
+		if(val) {
+			storageService.setData('latitudeFilter', parseFloat(val));
+		}
 	});
 	$scope.$watch('longitudeFilter', function(val) {
-		storageService.setData('longitudeFilter', parseFloat(val));
+		if(val) {
+			storageService.setData('longitudeFilter', parseFloat(val));
+		}
 	});
-
 });
