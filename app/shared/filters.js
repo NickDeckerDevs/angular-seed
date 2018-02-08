@@ -22,6 +22,12 @@ angular.module('app.filters', [])
     	return parseInt(meters);
   	};
 })
+.filter('toMiles', function() {
+	return function(input) {
+		var miles = parseInt(input) / 1609.34;
+    	return Math.round(miles * 10) / 10;
+  	};
+})
 .filter('toString', function() {
 	return function(input) {
 		return input.toString();
@@ -74,7 +80,7 @@ angular.module('app.filters', [])
 })
 .filter('toIcons', ['$sce', function($sce) {
 	return function(total, option) {
-		if(!total) return '<span class="no-data">No Data</span>';
+		if(!total) return $sce.trustAsHtml('<span class="no-data">No Data</span>');
 		var max = option == 'stars' ? 5 : 4;
 		var total = option == 'stars' ? total : total.toString().length;
 		var html = '';
@@ -100,4 +106,14 @@ angular.module('app.filters', [])
 		}
 		return $sce.trustAsHtml(html);
 	}
+}])
+.filter('yelpAddress', ['$sce', function($sce) {
+	return function(input) {
+		if(!input) return $sce.trustAsHtml('<span class="no-data">No Data</span>');
+		var address = '';
+		for(var i = 0; i < input.length; i++) {
+			address += '<p ng-class="toggleView" class="address">' + input[i] + '</p>' ;
+		}
+		return $sce.trustAsHtml(address);
+  	}
 }])
