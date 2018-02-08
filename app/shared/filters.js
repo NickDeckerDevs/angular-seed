@@ -22,9 +22,3 @@ angular.module('app.filters', [])
     	return parseInt(meters);
   	};
 })
-// .filter('orDefault', function() {
-// 	return function(input, default) {
-// 		var text = input.length > 0 ? input : default;
-// 		return text;
-// 	};
-// });
