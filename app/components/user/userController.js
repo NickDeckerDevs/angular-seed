@@ -1,5 +1,5 @@
 angular.module('user.controller', [])
-.controller('preferencesController', function($scope, geolocationservice, storageService) {
+.controller('preferencesController', function($scope, geolocationservice, storageService, $window) {
 	console.log(storageService.getAllData())
 	$scope.locationFilter = storageService.getData('locationFilter');
 	$scope.latitudeFilter = storageService.getData('latitudeFilter');
@@ -10,7 +10,19 @@ angular.module('user.controller', [])
 	$scope.distanceFilter = parseInt(1609.34 * 5).toString();
 	$scope.distanceOptions = ['5', '7', '10', '12', '15'];
 	$scope.usingLocation = storageService.getData('usingLocation');
-	$scope.locationType = $scope.usingLocation == false ? 'Address' : 'Location';
+	$scope.locationType = $scope.usingLocation == false ? 'Address' : 'Carrier Pigeons & Tesla Cars in Space';
+
+	$scope.showAdvanced = false;
+	$scope.showAdvancedClass = 'link';
+	$scope.showAdvancedToggle = function() {
+		$scope.showAdvanced = $scope.showAdvanced == false ? true : false;
+		$scope.showAdvancedClass = $scope.showAdvancedClass == 'link' ? 'link active' : 'link';
+		console.log('done with this stuffs')
+	}
+	$scope.clearData = function() {
+		storageService.clearData();
+		$window.location.reload();
+	}
 	$scope.isAddress = function() {
 		return $scope.locationType == 'address' ? true : false;
 	}
@@ -21,10 +33,10 @@ angular.module('user.controller', [])
 		$scope.locationType = 'Address';
 	}
 	$scope.getCurrentLocation = function() {
-		$scope.locationFilter = '';
-		$scope.usingLocation = true;
 		// start loading
 		geolocationservice.getCurrentPosition().then(function(response) {
+			$scope.locationFilter = '';
+			$scope.usingLocation = true;
 			$scope.latitudeFilter = response.latitude;
 			$scope.longitudeFilter = response.longitude;
 			$scope.locationType = 'Current Location';
