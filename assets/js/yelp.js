@@ -5,22 +5,28 @@ module.exports = {
 		var apiRequest = this.getApiDetails();
 		var options = this.getYelpOptions(req);
 		var requestUrl = apiRequest.endpoint + this.stringifyParams(options);
+		console.log('api GET url: ' + requestUrl)
 		request.get(requestUrl, {
 			headers: {
 				'Content-Type': 'application/json',
 				'Authorization': 'Bearer ' + apiRequest.token
 			}
 		}, function optionalCallBack(error, response, body) {
+			console.log('modem dialup in progress. Don\'t let mom pick up the phone')
 			if(error) {
+				console.log('error in api call')
 				res.send(error);
 			}
+			console.log('success in api call')
 			res.send(body);
 		});
 	},
 	getYelpOptions: function(req) {
+		var radius = req.body.distanceFilter <= 15 ? parseInt(1609.34 * parseInt(req.body.distanceFilter)) : req.body.distanceFilter;
+		radius = radius >= 40000 ? 39000 : radius;
 		var options = {
 			term: 'restaurants',
-			radius: parseInt(1609.34 * parseInt(req.body.distanceFilter)),
+			radius: radius,
 			sort_by: req.body.sortFilter,
 			limit: 40,
 			open_now: true
