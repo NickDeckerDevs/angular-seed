@@ -1,33 +1,46 @@
-<label for="get-lunch">
-	<input id="get-lunch" name="get-lunch" type="button" value="Find a Place to Eat" ng-click="getMyVenues()">
-</label>
+<div class="get-lunch-options">
+	<div class="center">
+		<input id="get-lunch" name="get-lunch" type="button" value="Get My Lunch Options!" ng-click="getMyVenues()">
+	</div>
+</div>
+<div class="view-options">
+	<div class="container">
+		<span class="option-spacing">View Options:</span>
+		<span ng-click="changeView('tile')"><i class="option-spacing fas fa-th"></i></span>
+		<span ng-click="changeView('list')"><i class="fas fa-list"></i></span>
+	</div>
+</div>
 
-<h2>Today's Options!</h2>
-<div><h3>View:</h3> <span ng-click="changeView('tile')">tiles</span> <span ng-click="changeView('list')">list</span>
-<ul>
-	<li ng-class="toggleView" ng-repeat="venue in dynamicVenueList">
-		<figure ng-class="toggleView">
-			<figcaption ng-class="toggleView"><h3>{{ venue.name }}</h3>
-				<span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span>
-				<span class="cost" ng-bind-html="venue.price | toIcons:'dollars'"></span>
-			</figcaption>
-			<img src="{{ venue.image_url}}" class="img-responsive">
-			<ul ng-class="toggleView" class="details">
-				<!-- <li>id: <p>{{ venue.id }}</p></li> -->
-				<li><span>Phone: </span> <a href="tel: {{ venue.phone | phoneNumber }}">{{ venue.phone | phoneNumber }}</a></li>
-				<!-- <li>Your Rating: <span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span></li> -->
-				<li>Yelp Rating: </li>
-				<li>
-				<li>Categories:
-					<ul>
-						<li class="category" ng-repeat="category in venue.categories">{{ category.title }}</li>
-					</ul>
-				</li>
-				<li>Address: <div ng-bind-html="venue.location.display_address | yelpAddress"></div></li>
-				<li>Distance: {{ venue.distance | toMiles }} miles</li>
+<div class="container">
+	<div ng-show="venueToggle">
+		<h2 class="section-title">Today's Options!</h2>
 
-			</ul>
-		</figure>
+		<ul class="venues row">
+			<li ng-class="{ 'col-xs-12 col-sm-4': viewToggle == 'tile', 'list col-sm-12': viewToggle == 'list' }" ng-repeat="venue in dynamicVenueList" venue-scripting-directive>
+				<figure class="col-md-12" ng-class="viewToggle">
+					<div class="venue-image-container" ng-class="{ 'col-sm-4 list': viewToggle == 'list' }" style="background: url({{ venue.image_url }}) center center no-repeat; background-size: cover;">
+					</div>
+					<figcaption ng-class="{ 'list col-md-8': viewToggle == 'list' }">
+						<h3 class="{{ venue.name | venueTitleClass }}">{{ venue.name }}</h3>
+						<div class="center">
+							<span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span>
+							<span class="cost" ng-bind-html="venue.price | toIcons:'dollars'"></span>
+						</div>
+					</figcaption>
+				</figure>
+				<ul ng-class="{ 'list': viewToggle == 'list' }" class="details col-md-12">
+					<li ng-if="venue.phone"><span>Phone: </span> <a ng-href="tel: {{ venue.phone | phoneNumber }}">{{ venue.phone | phoneNumber }}</a></li>
+					<!-- <li>Your Rating: <span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span></li> -->
 
-	</li>
-</ul>
+					<li ng-if="venue.categories" class="category">Categories:<br>
+						<span class="badge badge-secondary" ng-repeat="category in venue.categories">{{ category.title }}</span>
+					</li>
+					<li><a href="//www.google.com/maps/?q={{ venue.coordinates.longitude}},{{ venue.coordinates.latitude }}" ng-bind-html="venue.location.display_address | yelpAddress"></a></li>
+					<li>{{ venue.distance | toMiles }} miles away</li>
+
+				</ul>
+
+			</li>
+		</ul>
+	</div>
+</div>

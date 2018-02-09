@@ -1,8 +1,26 @@
 .find {
+	padding: 20px 0;
+	.get-lunch-options {
+		padding: 0 0 20px;
+	}
+	.view-options {
+		background: $grey;
+		padding: 10px;
+		> div {
+			text-align: right;
+		}
+		.option-spacing {
+			margin-right: 15px;
+		}
+
+	}
 	ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
+		&.venues {
+			margin-top: 40px;
+		}
 		li {
 			margin: 10px auto 45px;
 			display: inline-block;
@@ -12,26 +30,34 @@
 				padding: 10px 0;
 			}
 			figure {
-				max-width: 300px;
-				max-height: 300px;
 				overflow: hidden;
 				position: relative;
+				padding: 0;
+				.venue-image-container {
+					height: 300px;
+				}
 				&.list {
-					max-width: 100%;
-					max-height: 100%;
+
+				}
+				img:not(.list) {
+					position: relative;
 					height: 100%;
+					width: 100%;
+					object-fit: cover;
+
 				}
 				img {
-					position: relative;
-					height: 300px;
-					width: 300px;
-					object-fit: cover;
+					&.list {
+
+					}
 				}
 				figcaption {
 					box-sizing: border-box;
 					&.list {
 						position: relative;
 					}
+				}
+				figcaption:not(.list) {
 					background: $black-transparent;
 					position: absolute;
 					bottom: 0;
@@ -41,15 +67,17 @@
 					width: 100%;
 					padding: 10px;
 					color: $white;
-
-					h3,
-					h4 {
+					h3 {
 						text-align: center;
 						display: block;
 						margin: 0 auto;
 						font-size: 1.2em;
 						font-weight: 300;
 						line-height: 1.7;
+						&.smaller {
+							font-size: 1.05em;
+							line-height: 1.9;
+						}
 						&.list {
 							.stars,
 							.cost {
@@ -61,10 +89,7 @@
 
 						}
 					}
-					h4 {
-						font-size: 1.05em;
-						line-height: 1.6;
-					}
+
 					svg,
 					.fa {
 						font-size: 1.2em;
@@ -82,34 +107,30 @@
 						}
 					}
 				}
-				> ul {
-					margin-left: 10px;
-					&.details {
-						&.list {
-							li {
-								display: inline-block;
-							}
-						}
-					}
-					> li {
-						display: block;
-						margin: 10px auto;
-						&.category {
-							display: inline-block;
-							padding-right: 15px;
-						}
-					}
-				}
-				p {
-					&.address {
-						margin: 5px auto;
-						&.list {
-							display: inline-block;
-						}
-					}
-				}
 			}
 
+
+		}
+	}
+	 .details {
+		margin: 5px 0 0 0;
+		> li {
+			display: block;
+			margin: 0;
+			line-height: 1.7;
+			&.category {
+				span {
+					margin-left: 8px;
+				}
+			}
+		}
+	}
+	p {
+		&.address {
+			margin: 5px auto;
+			&.list {
+				display: inline-block;
+			}
 		}
 	}
 }
