@@ -1,16 +1,23 @@
 angular.module('venue.controller', [])
 .controller('venueController', function($scope, yelpAPIservice, storageService) {
 	// view methods
-	$scope.toggleView = 'tile';
+	$scope.viewToggle = 'tile';
+	$scope.listActive = false;
+	$scope.tileActive = true;
 	$scope.changeView = function(option) {
-		$scope.toggleView = option == 'tile' ? 'tile' : 'list';
+		console.log('changing view: ' + option)
+		$scope.viewToggle = option == 'tile' ? 'tile' : 'list';
+		$scope.listActive = option == 'tile' ? '' : 'active';
+		$scope.tileActive = option == 'tile' ? 'active' : '';
 	}
+	$scope.venueToggle = false;
 
 	//venue methods
 	$scope.dynamicVenueList = {};
 	$scope.filters = {};
 	$scope.getMyVenues = function() {
 		$scope.filters = storageService.getApiData();
+		$scope.venueToggle = true;
 		yelpAPIservice.getVenues($scope)
 			.then(function onSuccess(response) {
 				if(response.data.code == 'ENOTFOUND') {
@@ -446,7 +453,10 @@ angular.module('venue.controller', [])
 				} else {
 					console.log('api')
 					$scope.dynamicVenueList = response.data.businesses;
+
+					// window.fixCardHeights();
 				}
+
 
 			}).catch(function onError(response) {
 				console.log('error!')
