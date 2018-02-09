@@ -12,7 +12,7 @@ angular.module('user.storage', [])
 		'Seattle, WA',
 		'Stanta Ana, CA',
 		'Akron, OH',
-		'Virginia Beack, VA'
+		'Virginia Beach, VA'
 	];
 	var apiItems = [
 		'locationFilter',
