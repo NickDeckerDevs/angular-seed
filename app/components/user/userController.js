@@ -3,11 +3,11 @@ angular.module('user.controller', [])
 	var distanceAngularFilter = $filter('toMeters');
 
 	// view options
-	$scope.optionsToggleClass = true;
-	$scope.optionsToggleValue = 'Collapse Options';
+	$scope.optionsToggleClass = false;
+	$scope.optionsToggleValue = 'Expand Options';
 	$scope.optionsToggle = function() {
 		$scope.optionsToggleClass = $scope.optionsToggleClass == true ? false : true;
-		$scope.optionsToggleValue = $scope.optionsToggleClass == true ? 'Collapse Options' : 'Show Options';
+		$scope.optionsToggleValue = $scope.optionsToggleClass == true ? 'Collapse Options' : 'Expand Options';
 
 	}
 
