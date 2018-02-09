@@ -53,6 +53,7 @@ router.use(function(req, res, next) {
 
 // backend route to assist app with getting data from yelp
 app.post('/api/yelp', function(req, res) {
+	console.log('api/yelp backend route hit')
 	return yelpApi.getYelpData(req, res);
 });
 
