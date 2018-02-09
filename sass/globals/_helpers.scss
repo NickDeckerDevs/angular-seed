@@ -3,3 +3,19 @@
 	height: auto;
 	display:block;
 }
+.center {
+	margin: 0 auto;
+	text-align: center;
+
+}
+.fake-link {
+	color: $purple;
+	cursor: pointer;
+}
+h2 {
+	&.section-title {
+		font-size: 2em;
+		line-height: 1.25;
+		margin: 0;
+	}
+}

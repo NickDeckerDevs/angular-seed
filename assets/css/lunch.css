@@ -5286,6 +5286,30 @@ body {
   margin: 0 auto;
   text-align: center; }
 
+.fake-link {
+  color: #5818b5;
+  cursor: pointer; }
+
+h2.section-title {
+  font-size: 2em;
+  line-height: 1.25;
+  margin: 0; }
+
+header .nav {
+  padding: 10px 0 0;
+  background: #efefef; }
+  header .nav .menu {
+    padding: 0 15px 0 0;
+    margin: 0;
+    text-align: right; }
+
+header .branding {
+  padding: 10px 0; }
+  header .branding h1 {
+    font-size: 2.1em;
+    line-height: 1.2;
+    margin: 0; }
+
 .find ul {
   list-style: none;
   margin: 0;
@@ -5370,10 +5394,16 @@ body {
 
 .preferences {
   background: #efefef;
-  padding: 40px 0; }
-  .preferences .location-options {
+  padding: 15px 0; }
+  .preferences .options .location-options {
     display: block;
     margin-bottom: 10px; }
   .preferences label {
     display: block;
-    margin: 0 0 10px 10px; }
+    margin: 10px 0; }
+  .preferences .advanced {
+    position: relative; }
+    .preferences .advanced .fake-link {
+      position: absolute;
+      top: 0;
+      right: 0; }
