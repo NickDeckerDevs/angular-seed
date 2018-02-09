@@ -2,6 +2,7 @@
 
 angular.module('lunch', [
     'ngSanitize',
+    'dcbImgFallback',
     'venue.controller',
     'venue.services',
     'user.controller',
