@@ -23,19 +23,15 @@
 	<!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
-    <h1>What's For Lunch</h1>
-    <ul class="menu">
-		<li><a href="#lunch">Find a Place for Lunch</a></li>
-		<li><a href="#review">Review Where I Ate</a></li>
-        <li><a href="#preferences">Change Preferences</a></li>
-	</ul>
+    <header ng-include="'shared/headerView.html'">
 
-    <div class="preferences" ng-controller="preferencesController" ng-include="'components/user/userPreferencesView.html'">
-		<!-- todo: move the find things to eat to the venue controller -->
-    </div>
-    <div class="find" ng-controller="venueController" ng-include="'components/venue/venueView.html'">
+    </header>
+    <section class="preferences" ng-controller="preferencesController" ng-include="'components/user/userPreferencesView.html'">
+        
+    </section>
+    <section class="find" ng-controller="venueController" ng-include="'components/venue/venueView.html'">
 
-    </div>
+    </section>
 
 
 	<!-- In production use:
