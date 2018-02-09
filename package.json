@@ -6,6 +6,10 @@
   "description": "A starter project for AngularJS",
   "repository": "https://github.com/angular/angular-seed",
   "license": "MIT",
+  "engines": {
+    "node": "6.10.0",
+    "npm": "4.1.2"
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "gulp": "^3.9.1",
@@ -44,8 +48,8 @@
     "update-index-async": "node -e \"var fs=require('fs'),indexFile='app/index-async.html',loaderFile='app/bower_components/angular-loader/angular-loader.min.js',loaderText=fs.readFileSync(loaderFile,'utf-8').split(/sourceMappingURL=angular-loader.min.js.map/).join('sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map'),indexText=fs.readFileSync(indexFile,'utf-8').split(/\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/).join('//@@NG_LOADER_START@@\\n'+loaderText+'    //@@NG_LOADER_END@@');fs.writeFileSync(indexFile,indexText);\""
   },
   "dependencies": {
-    "express": "^4.16.2",
     "body-parser": "~1.4.2",
+    "express": "4.16.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "install": "^0.10.4",
@@ -53,7 +57,25 @@
     "mongoose": "~3.8.0",
     "npm": "^5.6.0",
     "request": "^2.83.0",
-    "yelp-api": "^1.0.3"
+    "yelp-api": "^1.0.3",
+    "bower": "^1.7.7",
+    "gulp-debug": "^3.2.0",
+    "gulp-notify": "^3.2.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-run": "^1.7.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "http-server": "^0.9.0",
+    "jasmine-core": "^2.99.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^0.2.3",
+    "karma-firefox-launcher": "^0.1.7",
+    "karma-jasmine": "^0.3.8",
+    "karma-junit-reporter": "^0.4.1",
+    "protractor": "^4.0.9",
+    "sass-include-paths": "^4.10.0"
   },
   "start": "ng serve --proxy-config proxy.conf.json"
 }
