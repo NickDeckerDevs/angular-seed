@@ -5349,6 +5349,11 @@ header .branding {
           box-sizing: border-box; }
           .find ul li figure figcaption.list {
             position: relative; }
+            .find ul li figure figcaption.list h3 {
+              display: inline-block; }
+            .find ul li figure figcaption.list .center {
+              display: inline-block;
+              padding-left: 15px; }
         .find ul li figure figcaption:not(.list) {
           background: rgba(0, 0, 0, 0.7);
           position: absolute;

@@ -20,7 +20,7 @@
 				<figure class="col-md-12" ng-class="viewToggle">
 					<div class="venue-image-container" ng-class="{ 'col-sm-4 list': viewToggle == 'list' }" style="background: url({{ venue.image_url }}) center center no-repeat; background-size: cover;">
 					</div>
-					<figcaption ng-class="{ 'list col-md-8': viewToggle == 'list' }">
+					<figcaption ng-class="{ 'list col-sm-8': viewToggle == 'list' }">
 						<h3 class="{{ venue.name | venueTitleClass }}">{{ venue.name }}</h3>
 						<div class="center">
 							<span class="stars" ng-bind-html="venue.rating | toIcons:'stars'"></span>

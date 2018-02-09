@@ -2,15 +2,7 @@ angular.module('user.controller', [])
 .controller('preferencesController', function($scope, geolocationservice, storageService, $window, $filter) {
 	var distanceAngularFilter = $filter('toMeters');
 
-	// view options
-	$scope.optionsToggleClass = false;
-	$scope.optionsToggleValue = 'Expand Options';
-	$scope.optionsToggle = function() {
-		$scope.optionsToggleClass = $scope.optionsToggleClass == true ? false : true;
-		$scope.optionsToggleValue = $scope.optionsToggleClass == true ? 'Collapse Options' : 'Expand Options';
-
-	}
-
+	// data
 	$scope.locationFilter = storageService.getData('locationFilter');
 	$scope.latitudeFilter = storageService.getData('latitudeFilter');
 	$scope.longitudeFilter = storageService.getData('longitudeFilter');
@@ -22,6 +14,14 @@ angular.module('user.controller', [])
 	$scope.usingLocation = storageService.getData('usingLocation');
 	$scope.locationType = $scope.usingLocation == false ? 'Address' : 'Carrier Pigeons & Tesla Cars in Space';
 
+	// view options
+	$scope.optionsToggleClass = false;
+	$scope.optionsToggleValue = 'Expand Options';
+	$scope.optionsToggle = function() {
+		$scope.optionsToggleClass = $scope.optionsToggleClass == true ? false : true;
+		$scope.optionsToggleValue = $scope.optionsToggleClass == true ? 'Collapse Options' : 'Expand Options';
+
+	}
 	$scope.showAdvanced = false;
 	$scope.showAdvancedClass = 'link';
 	$scope.showAdvancedToggle = function() {
@@ -29,6 +29,7 @@ angular.module('user.controller', [])
 		$scope.showAdvancedClass = $scope.showAdvancedClass == 'link' ? 'link active' : 'link';
 		console.log('done with this stuffs')
 	}
+
 	$scope.clearData = function() {
 		storageService.clearData();
 		$window.location.reload();
@@ -53,7 +54,8 @@ angular.module('user.controller', [])
 			//end loading
 		});
 	}
-	// ng-change methods
+
+	// ng-change methods & watchers
 	$scope.updateLocationFilter = function(val) {
 		storageService.setData('locationFilter', val);
 	}

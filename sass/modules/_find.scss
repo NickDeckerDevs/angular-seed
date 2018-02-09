@@ -55,6 +55,14 @@
 					box-sizing: border-box;
 					&.list {
 						position: relative;
+						h3 {
+							display: inline-block;
+
+						}
+						.center {
+							display: inline-block;
+							padding-left: 15px;
+						}
 					}
 				}
 				figcaption:not(.list) {
