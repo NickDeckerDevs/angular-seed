@@ -112,8 +112,15 @@ angular.module('app.filters', [])
 		if(!input) return $sce.trustAsHtml('<span class="no-data">No Data</span>');
 		var address = '';
 		for(var i = 0; i < input.length; i++) {
-			address += '<p ng-class="toggleView" class="address">' + input[i] + '</p>' ;
+			address += input[i] + '<br>' ;
 		}
 		return $sce.trustAsHtml(address);
   	}
 }])
+.filter('venueTitleClass', function() {
+	return function(title) {
+		if(!title) return '';
+		titleClass = title.length < 30 ? '' : 'smaller';
+		return titleClass;
+	}
+})
