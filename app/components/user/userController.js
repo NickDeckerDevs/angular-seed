@@ -2,6 +2,15 @@ angular.module('user.controller', [])
 .controller('preferencesController', function($scope, geolocationservice, storageService, $window, $filter) {
 	var distanceAngularFilter = $filter('toMeters');
 
+	// view options
+	$scope.optionsToggleClass = true;
+	$scope.optionsToggleValue = 'Collapse Options';
+	$scope.optionsToggle = function() {
+		$scope.optionsToggleClass = $scope.optionsToggleClass == true ? false : true;
+		$scope.optionsToggleValue = $scope.optionsToggleClass == true ? 'Collapse Options' : 'Show Options';
+
+	}
+
 	$scope.locationFilter = storageService.getData('locationFilter');
 	$scope.latitudeFilter = storageService.getData('latitudeFilter');
 	$scope.longitudeFilter = storageService.getData('longitudeFilter');

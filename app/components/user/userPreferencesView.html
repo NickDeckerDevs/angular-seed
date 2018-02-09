@@ -1,40 +1,52 @@
-<h2>Options</h2>
-<div class="regular">
-	<label for="location">
-		<span class="location-options">Location Options: <span id="location-type">{{ locationType }}</span></span>
-		<input id="address" ng-show="!usingLocation" name="address" type="text" ng-model="locationFilter" ng-change="updateLocationFilter(locationFilter)" ng-model-options="{ debounce: 1500 }" placeholder="Enter City, State and/or Zip">
-		<!--- reset location -->
-		<input id="reset-location" ng-show="usingLocation" name="reset-location" type="button" value="Reset Location Options" ng-click="resetLocation()">
-		<!--- get location -->
-		<input id="get-my-location-button" ng-show="!usingLocation" name="get-my-location-button" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
-	</label>
-	<label for "geo" ng-hide="true">
-		Latitude:
-		<input id="lat" ng-show="usingLocation" name="lat" type="text" ng-model="latitudeFilter" disabled>
-		<br>
-		Longitude:
-		<input id="long" ng-show="usingLocation" name="long" type="text" ng-model="longitudeFilter" disabled>
-	</label>
-	<label for="using-location" ng-hide="true">
-		Using Location:
-		<input type="text" ng-model="usingLocation">
-	</label>
-	<label for="sort_by">
-		Sort Preference:
-		<select id="sort_by" name="sort_by" ng-model="sortFilter" ng-change="updateSortFilter(sortFilter)">
-			 <option ng-repeat="option in sortOptions" value="{{ option }}">{{ option | prettyText }}</option>
-		 </select>
-	</label>
-	<label for="distance">
-		Mile Radius:
-		<select id="distance" name="distance" ng-model="distanceFilter" ng-change="updateDistanceFilter(distanceFilter)">
-			 <option ng-repeat="miles in distanceOptions" value="{{ miles }}">{{ miles }}</option>
-		 </select>
-	</label>
-	<span ng-class="link" ng-click="showAdvancedToggle()">Show Advanced Settings</span>
+<div class="container" ng-show="optionsToggleClass">
+	<div class="options col-sm-6">
+		<h2 class="section-title">Options</h2>
+		<label for="location">
+			<span class="location-options">Location Setting: <span id="location-type">{{ locationType }}</span></span>
+			<input id="address" ng-show="!usingLocation" name="address" type="text" ng-model="locationFilter" ng-change="updateLocationFilter(locationFilter)" ng-model-options="{ debounce: 1500 }" placeholder="Enter City, State and/or Zip">
+			<!--- reset location -->
+			<input id="reset-location" ng-show="usingLocation" name="reset-location" type="button" value="Reset Location Options" ng-click="resetLocation()">
+			<!--- get location -->
+			<input id="get-my-location-button" ng-show="!usingLocation" name="get-my-location-button" type="button" value="Use My Current Location" ng-click="getCurrentLocation()">
+		</label>
+		<label for "geo" ng-hide="true">
+			Latitude:
+			<input id="lat" ng-show="usingLocation" name="lat" type="text" ng-model="latitudeFilter" disabled>
+			<br>
+			Longitude:
+			<input id="long" ng-show="usingLocation" name="long" type="text" ng-model="longitudeFilter" disabled>
+		</label>
+		<label for="using-location" ng-hide="true">
+			Using Location:
+			<input type="text" ng-model="usingLocation">
+		</label>
+		<label for="sort_by">
+			Sort Preference:
+			<select id="sort_by" name="sort_by" ng-model="sortFilter" ng-change="updateSortFilter(sortFilter)">
+				 <option ng-repeat="option in sortOptions" value="{{ option }}">{{ option | prettyText }}</option>
+			 </select>
+		</label>
+		<label for="distance">
+			Mile Radius:
+			<select id="distance" name="distance" ng-model="distanceFilter" ng-change="updateDistanceFilter(distanceFilter)">
+				 <option ng-repeat="miles in distanceOptions" value="{{ miles }}">{{ miles }}</option>
+			 </select>
+		</label>
+
+	</div>
+	<div class="advanced col-sm-6">
+		<p class="fake-link" ng-class="link" ng-click="showAdvancedToggle()">Show Advanced Settings</p>
+		<div ng-show="showAdvanced">
+			<h2 class="section-title">Advanced Options</h2>
+			<label for="clear-data">
+				Please Remove All Of My Location & Search Preferences:
+				<label>
+					<input id="clear-data" name="reset-data" type="button" value="Reset User Data" ng-click="clearData()">
+				</label>
+			</label>
+		</div>
+	</div>
 </div>
-<div class="advanced">
-	<label for="clear-data">
-		<input id="clear-data" ng-show="showAdvanced" name="reset-data" type="button" value="Reset User Data" ng-click="clearData()">
-	</label>
+<div class="center">
+	<input id="preferences" name="preferences" type="button" ng-value="optionsToggleValue" ng-click="optionsToggle()">
 </div>
