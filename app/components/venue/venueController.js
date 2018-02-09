@@ -18,7 +18,9 @@ angular.module('venue.controller', [])
 	$scope.getMyVenues = function() {
 		$scope.filters = storageService.getApiData();
 		$scope.venueToggle = true;
+		console.log('starting api in frontend')
 		yelpAPIservice.getVenues($scope)
+
 			.then(function onSuccess(response) {
 				if(response.data.code == 'ENOTFOUND') {
 					console.log('no api, using static')
@@ -451,7 +453,7 @@ angular.module('venue.controller', [])
 					}
 					$scope.dynamicVenueList = staticResults.businesses;
 				} else {
-					console.log('api')
+					console.log('has internet and reaching out to api')
 					$scope.dynamicVenueList = response.data.businesses;
 
 					// window.fixCardHeights();

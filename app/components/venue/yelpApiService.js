@@ -1,6 +1,7 @@
 angular.module('venue.services', [])
 .factory('yelpAPIservice', function($http) { //options to be brought in or some how override default
 	'use strict';
+	console.log('starting backend api call')
 	var apiRequest = {
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
@@ -9,8 +10,8 @@ angular.module('venue.services', [])
 
 	var yelpAPI = {};
 	yelpAPI.getVenues = function($scope) {
-		console.log('sending to yelp api frontend')
 		var filters = $scope.filters;
+		console.log('filter options being sent to api')
 		console.log(filters);
 		return $http.post('/api/yelp', filters, apiRequest.headers);
 	}
